@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Atomic Swap</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Atomic Swap</h1>
+            <div id="address">Address： {{address}}</div>
+
+            <div id="balance">
+                <div>
+                    <h2>Balance</h2>
+                    <ul class="amount">
+                        <li>{{btc}} BTC</li>
+                        <li>{{eth}} ETH</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="swap">
+                <h2>Swap</h2>
+                <form #myForm="ngForm" (ngSubmit)="submit()">
+                    
+                        
+                    <div class="form-group">
+                        <label>currency1</label>
+                        <input  name="before-amount" type="number" [(ngModel)]="before_amount" class="form-control">
+                        <select name="before" [(ngModel)]="before" class="form-control">
+                            <option value="BTC">BTC</option>
+                            <option value="ETH">ETH</option>
+                        </select>
+                    </div>
+                        
+                    
+                    <h5>to</h5>
+                    <div class="form-group">
+                        <label>currency2</label>
+                        <input name="after-amount" type="number" [(ngModel)]="after_amount" class="form-control" readonly>
+                        <select name="after" [(ngModel)]="after" class="form-control">
+                            <option value="BTC">BTC</option>
+                            <option value="ETH">ETH</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>your secret key</label>
+                        <input name="secret" type="password" [(ngModel)]="secret"  class="form-control">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Offer</button>
+                    
+                    
+                </form>
+            </div>
+            <div id="history">
+                <h2>Tx History</h2>
+                    <ul class="txs">
+                        <ng-container *ngFor="let history of histories">
+                            <li class="tx">
+                                <p>Time Stump: {{history.timestump}}</p>
+                                <p>Status: {{history.status}}</p>
+                                <p>Refund Address: {{history.refund}}</p>
+                                <p>Currency1: {{history.amount1}} {{history.currency1}}</p>
+                                <p>Currency2: {{history.amount2}} {{history.currency2}}</p>
+                            </li>
+                        
+                        </ng-container>
+                    </ul>
+                </div>
+        </div>
+        
+    </body>
+</html>
